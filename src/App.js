@@ -21,10 +21,11 @@ function CharacterCard(props){
 
 class App extends React.Component{
   state={
-    nextPage:[],
+    nextPage:1,
     loading:true,
     error:null,
     data:{
+		info:{},
       results:[],
     },
   }
@@ -47,19 +48,21 @@ class App extends React.Component{
           data.results
         )
       },
-      nextPage:this.state.nextPage + 1,
-    })
+      nextPage:this.state.nextPage+1
+    });
   }catch(error){
     this.setState({
       loading:false,
       error:error
     })
   }
-  }
+  };
+
   render(){
     if(this.state.error){
-      return `Error: ${this.state.error.message}`
-  }
+      return `Error: ${this.state.error}`
+      //return "Error!";
+    }
   return (
    
   <div className="background">  
@@ -79,7 +82,7 @@ class App extends React.Component{
         </div>
       )}
 
-      {!this.state.loading &&(
+      {!this.state.loading && (
         <button onClick={()=>this.fetchCharacters()} style={{width:"100%"}} >Load more</button>
       )}
     </div>
